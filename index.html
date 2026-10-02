@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff8e9">
+  <meta name="description" content="放屁超人白思雨！用四种屁和大便粒暴击闯过臭臭岛，赢取浩然杯。手机和电脑都能玩的免费网页小游戏。">
+  <title>放屁超人白思雨 · 浩然杯大冒险</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="放屁超人首页"><span class="brand-mark">B!</span> 白思雨的英雄事务所</a>
+      <span class="edition"><i></i> 浩然杯大冒险 · v1.0</span>
+    </header>
+    <main>
+      <section class="intro">
+        <div><div class="eyebrow">小英雄，大动静。 <span>噗——</span></div><h1>放屁超人<span>白思雨</span><svg viewBox="0 0 90 65" aria-hidden="true"><path d="M10 52c-16-9-2-31 12-25C13 6 48-7 55 18 82 8 93 42 70 47c5 16-28 24-34 7-8 9-16 9-26-2Z" fill="#c8df76" stroke="#333c2d" stroke-width="3"/><path d="m6 48-6 8m17-2-4 9" stroke="#333c2d" stroke-width="3"/></svg></h1><p>四色屁力，拯救臭臭岛。今天的目标：把<span class="underline">浩然杯</span>抱回家！</p></div>
+        <div class="record-card"><span class="record-icon">★</span><div><small>你的最佳战绩</small><strong id="best-score">0 <span>分</span></strong></div></div>
+      </section>
+      <section class="game-card" aria-label="放屁超人游戏">
+        <div class="game-topbar"><div class="live-label"><span></span><b id="zone-label">01 / 豆豆草原</b></div><div class="top-actions"><button id="sound-toggle" type="button" aria-label="关闭音效" title="音效开关">♫ <span>音效开</span></button><button id="pause-toggle" type="button" aria-label="暂停游戏" title="暂停 P">Ⅱ <span>暂停</span></button></div></div>
+        <div class="stage" id="stage">
+          <canvas id="game" aria-label="横版闯关游戏画面，使用下方按钮或键盘游玩"></canvas>
+          <div class="hud" id="hud"><div class="hud-health"><span id="hearts" aria-label="生命值">♥ ♥ ♥ ♥ ♥</span><div class="energy-track" aria-label="屁力"><div id="energy-fill"></div></div><small id="energy-text">屁力 100%</small></div><div class="hud-score"><strong id="score">0</strong><span>分 <i>·</i> 豆豆 <b id="beans">0</b></span></div></div>
+          <div id="toast" class="game-toast" role="status" aria-live="polite"></div>
+          <div class="boss-meter" id="boss-meter" hidden><span>臭臭大王</span><div><i id="boss-fill"></i></div></div>
+          <div class="overlay" id="overlay">
+            <div class="overlay-card" id="overlay-card">
+              <span class="modal-badge" id="modal-badge">屁力全开 · 准备出发</span><h2 id="modal-title">英雄，就位！</h2><p id="modal-description">穿过豆豆草原和香香云谷，打败臭臭大王，赢取传说中的浩然杯。</p>
+              <div class="start-tips" id="start-tips"><span><b>①</b> 左右跑 + 二段跳</span><span><b>②</b> 换屁攻击，暴击喷大便粒</span><span><b>③</b> 吃豆回气，粉屁回血</span></div>
+              <button id="primary-action" class="primary-button" type="button">出发！屁力全开 <span>→</span></button>
+              <button id="secondary-action" class="secondary-button" type="button" hidden>重新开始</button>
+              <small id="modal-footnote">首次点击后开启搞怪音效 · 推荐横屏游玩</small>
+            </div>
+          </div>
+        </div>
+        <div class="skill-strip" aria-label="选择屁技能">
+          <button class="skill yellow" data-skill="yellow" type="button"><span class="skill-swatch">闪</span><span><b>黄屁</b><small>冲击波</small></span><kbd>1</kbd></button>
+          <button class="skill green" data-skill="green" type="button"><span class="skill-swatch">雾</span><span><b>绿屁</b><small>臭雾减速</small></span><kbd>2</kbd></button>
+          <button class="skill stink selected" data-skill="stink" type="button" aria-pressed="true"><span class="skill-swatch">噗</span><span><b>普通臭屁</b><small>快速连发</small></span><kbd>3</kbd></button>
+          <button class="skill pink" data-skill="pink" type="button"><span class="skill-swatch">♥</span><span><b>粉色香屁</b><small>回血净化</small></span><kbd>4</kbd></button>
+        </div>
+        <div class="touch-controls" id="touch-controls" aria-label="游戏操作按钮">
+          <div class="direction-buttons"><button class="control-button direction" data-control="left" type="button" aria-label="向左移动">←</button><button class="control-button direction" data-control="right" type="button" aria-label="向右移动">→</button></div>
+          <span class="touch-hint">长按放屁可连发</span>
+          <div class="action-buttons"><button class="control-button jump-button" data-control="jump" type="button">↑ <span>跳跃</span></button><button class="control-button fart-button" data-control="fire" type="button">噗！<span>放屁</span></button></div>
+        </div>
+        <div class="game-bottom"><span><i></i> 吃豆回气 · 连续攻击必出暴击</span><span class="keyboard-help"><kbd>A</kbd><kbd>D</kbd> 移动 <kbd>空格</kbd> 跳跃 <kbd>J</kbd> 放屁 <kbd>K</kbd> 换屁</span><span class="mobile-help">手机支持多指同时操作</span></div>
+      </section>
+      <section class="below-game"><div class="mission-note"><span class="note-number">01—03</span><div><h3>三段冒险，一座浩然杯。</h3><p>草原热身 → 云谷闯关 → 臭臭大王。路上的小旗子会保存你的复活位置。</p></div></div><div class="crit-note"><span class="poop-mini">●</span><div><h3>暴击！大便粒来袭</h3><p>攻击有概率暴击；连续 4 次必出。噗得漂亮，打得更狠。</p></div></div></section>
+    </main>
+    <footer>原创小冒险 / 白思雨出品 <span>不服？来一场屁力对决。</span></footer>
+  </div>
+  <script type="module" src="./src/game.js"></script>
+</body>
+</html>

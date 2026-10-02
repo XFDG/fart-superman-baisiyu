@@ -1,0 +1,13 @@
+{
+  "name": "fart-superman-baisiyu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "放屁超人白思雨 · 手机和电脑网页冒险游戏",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "start": "node tools/serve.mjs",
+    "check": "node tools/check.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,401 @@
+{
+  "game-report.json": {
+    "reports": [
+      {
+        "test": "start/audio",
+        "details": {
+          "mode": "playing",
+          "audio": "running"
+        }
+      },
+      {
+        "test": "normal movement/beans/enemy",
+        "details": {
+          "x": 737.510748026217,
+          "beans": 4,
+          "deadEnemies": 1,
+          "hp": 5
+        }
+      },
+      {
+        "test": "double jump",
+        "details": {
+          "y1": 345.6915427083333,
+          "y2": 310.89989375,
+          "jumps": 2
+        }
+      },
+      {
+        "test": "skill yellow",
+        "details": {
+          "projectileKinds": [
+            "yellow",
+            "poop",
+            "poop",
+            "poop",
+            "poop"
+          ],
+          "energy": 86.75768333333333
+        }
+      },
+      {
+        "test": "skill green",
+        "details": {
+          "projectileKinds": [
+            "green"
+          ],
+          "energy": 80.43246666666667
+        }
+      },
+      {
+        "test": "skill stink",
+        "details": {
+          "projectileKinds": [
+            "stink",
+            "poop",
+            "poop",
+            "poop",
+            "poop"
+          ],
+          "energy": 92.65043333333332
+        }
+      },
+      {
+        "test": "skill pink",
+        "details": {
+          "projectileKinds": [
+            "pink"
+          ],
+          "energy": 78.43246666666667
+        }
+      },
+      {
+        "test": "pink heal",
+        "details": {
+          "hp": 4
+        }
+      },
+      {
+        "test": "poop critical hit",
+        "details": {
+          "critCount": 6,
+          "poopParticles": 4
+        }
+      },
+      {
+        "test": "green slow",
+        "details": {
+          "slowed": [
+            {
+              "type": "slime",
+              "hp": 16,
+              "slow": 2.9833
+            }
+          ]
+        }
+      },
+      {
+        "test": "gap revive",
+        "details": {
+          "hp": 4,
+          "x": 110
+        }
+      },
+      {
+        "test": "checkpoint revive",
+        "details": {
+          "checkpoint": 1,
+          "hp": 4,
+          "x": 2270
+        }
+      },
+      {
+        "test": "pause/resume/blur",
+        "details": {
+          "pausedTime": 26.85326666666647,
+          "modeAfterResume": "playing"
+        }
+      },
+      {
+        "test": "real boss fight",
+        "details": {
+          "bossDefeated": true,
+          "hp": 4,
+          "score": 1575,
+          "boss": {
+            "x": 6075.334666666628,
+            "y": 339,
+            "w": 105,
+            "h": 105,
+            "type": "boss",
+            "hp": 0,
+            "maxHp": 430,
+            "origin": 6160,
+            "vy": 0,
+            "dir": -1,
+            "speed": 40,
+            "slow": 0,
+            "flash": 0.16,
+            "dead": true,
+            "phase": 0,
+            "attack": 1.100000000000002
+          }
+        }
+      },
+      {
+        "test": "trophy win",
+        "details": {
+          "mode": "won",
+          "score": 3075,
+          "best": 3075
+        }
+      },
+      {
+        "test": "best/mute persistence",
+        "details": {
+          "best": 3075,
+          "muted": true
+        }
+      },
+      {
+        "test": "lose/restart",
+        "details": {
+          "mode": "playing",
+          "hp": 5,
+          "score": 0
+        }
+      }
+    ],
+    "errors": []
+  },
+  "mobile-report.json": {
+    "reports": [
+      {
+        "test": "touch start/audio",
+        "mode": "playing",
+        "audio": "running"
+      },
+      {
+        "test": "two fingers move and fire",
+        "input": {
+          "left": false,
+          "right": true,
+          "fire": true
+        },
+        "x": 187.47342097222221,
+        "projectiles": 2
+      },
+      {
+        "test": "three fingers move fire jump",
+        "input": {
+          "left": false,
+          "right": true,
+          "fire": true
+        },
+        "y": 316.7746927083333,
+        "jumps": 1
+      },
+      {
+        "test": "independent finger release",
+        "input": {
+          "left": false,
+          "right": false,
+          "fire": false
+        }
+      },
+      {
+        "test": "touch cancel",
+        "input": {
+          "left": false,
+          "right": false,
+          "fire": false
+        }
+      },
+      {
+        "test": "skill and pause touch buttons",
+        "skill": "pink",
+        "mode": "playing"
+      },
+      {
+        "test": "landscape controls visible",
+        "pageWidth": 844,
+        "width": 844,
+        "stageBottom": 386.0625,
+        "controlsBottom": 329.703125,
+        "height": 390
+      },
+      {
+        "test": "320px start button and overflow",
+        "stageTop": 230.1875,
+        "stageBottom": 447.6875,
+        "buttonTop": 394.43731689453125,
+        "buttonBottom": 433.48095703125,
+        "width": 320,
+        "pageWidth": 320
+      }
+    ],
+    "errors": []
+  },
+  "layout-report.json": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "pageWidth": 1440,
+      "stage": {
+        "x": 120,
+        "y": 325.578125,
+        "width": 1200,
+        "height": 675,
+        "bottom": 1000.578125,
+        "right": 1320
+      },
+      "start": {
+        "x": 571.4345703125,
+        "y": 741.3385620117188,
+        "width": 300.82696533203125,
+        "height": 55.22808837890625,
+        "bottom": 796.566650390625,
+        "right": 872.2615356445312
+      },
+      "overlayCard": {
+        "x": 531.8013916015625,
+        "y": 474.9869689941406,
+        "width": 376.397216796875,
+        "height": 376.1823425292969,
+        "bottom": 851.1693115234375,
+        "right": 908.1986083984375
+      },
+      "touchControls": {
+        "x": 120,
+        "y": 1086.578125,
+        "width": 1200,
+        "height": 59,
+        "bottom": 1145.578125,
+        "right": 1320
+      }
+    },
+    {
+      "name": "mobile-portrait",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "pageWidth": 390,
+      "stage": {
+        "x": 15,
+        "y": 235,
+        "width": 360,
+        "height": 270,
+        "bottom": 505,
+        "right": 375
+      },
+      "start": {
+        "x": 65.30551147460938,
+        "y": 412.7312316894531,
+        "width": 261.6234436035156,
+        "height": 42.549285888671875,
+        "bottom": 455.280517578125,
+        "right": 326.928955078125
+      },
+      "overlayCard": {
+        "x": 42.515625,
+        "y": 252.37530517578125,
+        "width": 304.96875,
+        "height": 235.2493896484375,
+        "bottom": 487.62469482421875,
+        "right": 347.484375
+      },
+      "touchControls": {
+        "x": 15,
+        "y": 572,
+        "width": 360,
+        "height": 64,
+        "bottom": 636,
+        "right": 375
+      }
+    },
+    {
+      "name": "mobile-small",
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "pageWidth": 320,
+      "stage": {
+        "x": 15,
+        "y": 230.1875,
+        "width": 290,
+        "height": 217.5,
+        "bottom": 447.6875,
+        "right": 305
+      },
+      "start": {
+        "x": 44.822933197021484,
+        "y": 395.437255859375,
+        "width": 232.57550048828125,
+        "height": 39.043609619140625,
+        "bottom": 434.4808654785156,
+        "right": 277.39843368530273
+      },
+      "overlayCard": {
+        "x": 25.115489959716797,
+        "y": 239.88294982910156,
+        "width": 269.76904296875,
+        "height": 222.89036560058594,
+        "bottom": 462.7733154296875,
+        "right": 294.8845329284668
+      },
+      "touchControls": {
+        "x": 15,
+        "y": 511.6875,
+        "width": 290,
+        "height": 64,
+        "bottom": 575.6875,
+        "right": 305
+      }
+    },
+    {
+      "name": "mobile-landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "pageWidth": 844,
+      "stage": {
+        "x": 16,
+        "y": 39,
+        "width": 617,
+        "height": 347.0625,
+        "bottom": 386.0625,
+        "right": 633
+      },
+      "start": {
+        "x": 198.54904174804688,
+        "y": 269.3057861328125,
+        "width": 254.589599609375,
+        "height": 40.427459716796875,
+        "bottom": 309.7332458496094,
+        "right": 453.1386413574219
+      },
+      "overlayCard": {
+        "x": 172.306396484375,
+        "y": 82.93273162841797,
+        "width": 304.38720703125,
+        "height": 259.197021484375,
+        "bottom": 342.12975311279297,
+        "right": 476.693603515625
+      },
+      "touchControls": {
+        "x": 633,
+        "y": 182.34375,
+        "width": 195,
+        "height": 147.359375,
+        "bottom": 329.703125,
+        "right": 828
+      }
+    }
+  ]
+}
