@@ -1,5 +1,5 @@
-import { GameAudio } from './audio.js';
-import { drawBackdrop, drawPlatform, drawHero, drawEnemy, drawTrophy, drawPoop, drawBean, drawWeapon } from './art.js';
+import { GameAudio } from './audio.js?v=1.2';
+import { drawBackdrop, drawPlatform, drawHero, drawEnemy, drawTrophy, drawPoop, drawBean, drawWeapon } from './art.js?v=1.2';
 
 const $ = (s) => document.querySelector(s);
 const canvas = $('#game');
