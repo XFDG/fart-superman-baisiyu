@@ -13,7 +13,7 @@
   <div class="page-shell">
     <header class="site-header">
       <a class="brand" href="./" aria-label="放屁超人首页"><span class="brand-mark">B!</span> 白思雨的英雄事务所</a>
-      <span class="edition"><i></i> 浩然杯大冒险 · v1.1</span>
+      <span class="edition"><i></i> 浩然杯大冒险 · v1.2</span>
     </header>
     <main>
       <section class="intro">
@@ -21,7 +21,7 @@
         <div class="record-card"><span class="record-icon">★</span><div><small>你的最佳战绩</small><strong id="best-score">0 <span>分</span></strong></div></div>
       </section>
       <section class="game-card" aria-label="放屁超人游戏">
-        <div class="game-topbar"><div class="live-label"><span></span><b id="zone-label">01 / 豆豆草原</b><b id="difficulty-label" class="difficulty-label">标准</b></div><div class="top-actions"><button id="sound-toggle" type="button" aria-label="关闭音效" title="音效开关">♫ <span>音效开</span></button><button id="pause-toggle" type="button" aria-label="暂停游戏" title="暂停 P">Ⅱ <span>暂停</span></button></div></div>
+        <div class="game-topbar"><div class="live-label"><span></span><b id="zone-label">01 / 豆豆草原</b><b id="difficulty-label" class="difficulty-label">标准</b></div><div class="top-actions"><button id="guide-open" type="button" aria-haspopup="dialog" aria-controls="controls-guide"><span class="guide-label-full">操作指南</span><span class="guide-label-short">指南</span></button><button id="sound-toggle" type="button" aria-label="关闭音效" title="音效开关">♫ <span>音效开</span></button><button id="pause-toggle" type="button" aria-label="暂停游戏" title="暂停 P / Esc">Ⅱ <span>暂停</span></button></div></div>
         <div class="stage" id="stage">
           <canvas id="game" aria-label="横版闯关游戏画面，使用下方按钮或键盘游玩"></canvas>
           <div class="hud" id="hud"><div class="hud-health"><span id="hearts" aria-label="生命值">♥ ♥ ♥ ♥ ♥</span><div class="energy-track" aria-label="屁力"><div id="energy-fill"></div></div><small id="energy-text">屁力 100%</small></div><div class="hud-score"><strong id="score">0</strong><span>分 <i>·</i> 豆豆 <b id="beans">0</b></span></div></div>
@@ -31,7 +31,7 @@
             <div class="overlay-card" id="overlay-card">
               <div class="overlay-copy"><span class="modal-badge" id="modal-badge">屁力全开 · 准备出发</span><h2 id="modal-title">英雄，就位！</h2><p id="modal-description">穿过豆豆草原和香香云谷，打败臭臭大王，赢取传说中的浩然杯。</p>
               <div class="difficulty-picker" id="difficulty-picker" aria-label="选择游戏难度"><span class="difficulty-heading">今天想怎么玩？</span><div class="difficulty-options"><button data-difficulty="easy" type="button" aria-pressed="false">轻松<small>悠闲冒险</small></button><button data-difficulty="normal" class="selected" type="button" aria-pressed="true">标准<small>刚刚好玩</small></button><button data-difficulty="hard" type="button" aria-pressed="false">挑战<small>高手出击</small></button></div><p id="difficulty-note">标准：经典屁力冒险，准备好挑战臭臭大王！</p></div>
-              <div class="start-tips" id="start-tips"><span><b>①</b> 左右跑 + 二段跳</span><span><b>②</b> 换屁攻击，暴击喷大便粒</span><span><b>③</b> 吃豆回气，粉屁回血</span></div>
+              <div class="start-tips" id="start-tips"><span class="tips-desktop"><b>①</b> WASD / 方向键行动，W / ↑ 二段跳</span><span class="tips-desktop"><b>②</b> 1–4 选屁种，长按 K 放屁</span><span class="tips-desktop"><b>③</b> S / ↓ 下落，拾取武器后 E 炮击</span><span class="tips-phone"><b>①</b> 左手左右跑，↓ 从平台下落</span><span class="tips-phone"><b>②</b> 右手跳跃、放屁，长按可连发</span><span class="tips-phone"><b>③</b> 点四色选技能，多指一起按！</span></div>
               </div>
               <button id="primary-action" class="primary-button" type="button">出发！屁力全开 <span>→</span></button>
               <button id="secondary-action" class="secondary-button" type="button" hidden>重新开始</button>
@@ -47,16 +47,49 @@
           <button class="skill pink" data-skill="pink" type="button"><span class="skill-swatch">♥</span><span><b>粉色香屁</b><small>回血净化</small></span><kbd>4</kbd></button>
         </div>
         <div class="touch-controls" id="touch-controls" aria-label="游戏操作按钮">
-          <div class="direction-buttons"><button class="control-button direction" data-control="left" type="button" aria-label="向左移动">←</button><button class="control-button direction" data-control="right" type="button" aria-label="向右移动">→</button></div>
-          <span class="touch-hint">长按放屁可连发</span>
+          <div class="direction-buttons"><button class="control-button direction" data-control="left" type="button" aria-label="向左移动">←</button><button class="control-button down-button" data-control="down" type="button" aria-label="从悬浮平台下落，空中快速下降" title="从悬浮平台下落，空中快速下降">↓ <span>下落</span></button><button class="control-button direction" data-control="right" type="button" aria-label="向右移动">→</button></div>
+          <span class="touch-hint">左手移动 · 右手跳跃 / 放屁 · 多指同时按</span>
           <div class="action-buttons"><button class="control-button weapon-button" data-control="weapon" id="weapon-button" type="button" disabled aria-label="使用浩然屁力炮，键盘 E">炮击 <small>E</small></button><button class="control-button jump-button" data-control="jump" type="button">↑ <span>跳跃</span></button><button class="control-button fart-button" data-control="fire" type="button">噗！<span>放屁</span></button></div>
         </div>
-        <div class="game-bottom"><span><i></i> 吃豆回气 · 连续攻击必出暴击</span><span class="keyboard-help"><kbd>A</kbd><kbd>D</kbd> 移动 <kbd>空格</kbd> 跳跃 <kbd>J</kbd> 放屁 <kbd>E</kbd> 炮击 <kbd>K</kbd> 换屁</span><span class="mobile-help">手机支持多指同时操作</span></div>
+        <div class="game-bottom"><span><i></i> 吃豆回气 · 连续攻击必出暴击</span><span class="keyboard-help"><kbd>WASD</kbd> / 方向键行动 <kbd>1–4</kbd> 选屁 <kbd>K</kbd> 放屁 <kbd>E</kbd> 炮击 <kbd>P</kbd> 暂停</span><span class="mobile-help">左手移动 · 右手跳跃 / 放屁 · 多指同时按</span></div>
       </section>
       <section class="below-game"><div class="mission-note"><span class="note-number">01—03</span><div><h3>三段冒险，一座浩然杯。</h3><p>草原热身 → 云谷闯关 → 臭臭大王。捡起浩然屁力炮，向 BOSS 开火！</p></div></div><div class="crit-note"><span class="poop-mini">●</span><div><h3>暴击！大便粒来袭</h3><p>攻击有概率暴击；连续 4 次必出。噗得漂亮，打得更狠。</p></div></div></section>
     </main>
     <footer>原创小冒险 / 白思雨出品 <span>不服？来一场屁力对决。</span></footer>
   </div>
+  <dialog id="controls-guide" aria-labelledby="controls-guide-title">
+    <div class="guide-header"><div><span class="guide-eyebrow">白思雨的冒险小抄</span><h2 id="controls-guide-title">操作指南</h2></div><button id="guide-close" type="button" aria-label="关闭操作指南">关闭 <span aria-hidden="true">×</span></button></div>
+    <div class="guide-content">
+      <section class="guide-panel guide-desktop" aria-labelledby="guide-desktop-title">
+        <h3 id="guide-desktop-title">电脑 · 键盘出击</h3>
+        <div class="key-layout" aria-label="WASD 或方向键行动"><div class="key-cluster"><div><kbd>W</kbd></div><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div></div><span>或</span><div class="key-cluster"><div><kbd>↑</kbd></div><div><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div></div></div>
+        <dl class="guide-actions">
+          <div><dt><kbd>A</kbd> <kbd>D</kbd><small>或 ← / →</small></dt><dd>左右移动</dd></div>
+          <div><dt><kbd>W</kbd> / <kbd>↑</kbd></dt><dd>跳跃；空中再按一次可二段跳</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>↓</kbd></dt><dd>从脚下的悬浮平台穿过下落；空中长按可快速下降</dd></div>
+          <div><dt><kbd>1</kbd> <kbd>2</kbd><br><kbd>3</kbd> <kbd>4</kbd></dt><dd>选屁种：1 黄屁、2 绿屁、3 普通臭屁、4 粉色香屁</dd></div>
+          <div><dt><kbd>K</kbd></dt><dd>放屁攻击；长按持续连发</dd></div>
+          <div><dt><kbd>E</kbd></dt><dd>炮击；先在 BOSS 前拾取浩然屁力炮，消耗 18 点屁力，有充能间隔</dd></div>
+          <div><dt><kbd>P</kbd> / <kbd>Esc</kbd></dt><dd>暂停 / 继续游戏</dd></div>
+        </dl>
+        <p class="guide-note">空格也能跳跃。下落只穿过悬浮平台，地面不会穿透；注意脚下的深坑！</p>
+      </section>
+      <section class="guide-panel guide-phone" aria-labelledby="guide-phone-title">
+        <h3 id="guide-phone-title">手机 · 双手一起玩</h3>
+        <div class="phone-hands"><span><b>← ↓ →</b>左手行动</span><span><b>↑ 噗！</b>右手出招</span></div>
+        <dl class="guide-actions">
+          <div><dt>左手 ← / →</dt><dd>长按左右按钮移动</dd></div>
+          <div><dt>下落 ↓</dt><dd>从悬浮平台下落；空中长按快速下降，地面不穿透</dd></div>
+          <div><dt>右手「跳跃」</dt><dd>点一下起跳；空中再点一下二段跳</dd></div>
+          <div><dt>右手「放屁」</dt><dd>点按攻击，长按持续连发</dd></div>
+          <div><dt>四色技能卡</dt><dd>直接点黄、绿、普通臭、粉香，切换屁种</dd></div>
+          <div><dt>「炮击」</dt><dd>拾取浩然屁力炮后可用；长按可在充能完成后继续开火</dd></div>
+          <div><dt>顶部 Ⅱ / ▶</dt><dd>暂停 / 继续；随时点「指南」查看操作</dd></div>
+        </dl>
+        <p class="guide-note">支持多指同时按：左手移动，右手跳跃、放屁。吃豆回气，粉色香屁可以回血！</p>
+      </section>
+    </div>
+  </dialog>
   <script type="module" src="./src/game.js"></script>
 </body>
 </html>

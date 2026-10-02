@@ -43,8 +43,11 @@ h1 svg { width: 64px; height: 49px; transform: rotate(-10deg); margin-left: 1px;
 .live-label > span { width: 8px; height: 8px; background: #c8e98d; border-radius: 50%; box-shadow: 0 0 0 3px #465540; flex-shrink: 0; }
 .difficulty-label { font-size: 12px; font-weight: 600; border: 1px solid #738168; border-radius: 6px; padding: 3px 7px; white-space: nowrap; }
 .top-actions { display: flex; gap: 12px; flex-shrink: 0; }
-.top-actions button { background: none; color: #fffbe9; border: 0; min-height: 40px; padding: 6px; font-size: 20px; display: flex; align-items: center; gap: 6px; }
+.top-actions button { background: none; color: #fffbe9; border: 0; min-height: 44px; min-width: 44px; padding: 6px; font-size: 20px; display: flex; align-items: center; gap: 6px; }
 .top-actions button span { font-size: 13px; }
+#guide-open { border: 1px solid #78816c; border-radius: 8px; padding: 6px 11px; background: #ffffff0c; }
+#guide-open .guide-label-full { display: inline; font-weight: 700; }
+#guide-open .guide-label-short { display: none; font-weight: 700; }
 .stage { position: relative; width: 100%; min-width: 0; aspect-ratio: 16/9; overflow: hidden; background: #dcead1; isolation: isolate; }
 canvas { width: 100%; height: 100%; display: block; touch-action: none; }
 .hud { position: absolute; top: 16px; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 12px; pointer-events: none; }
@@ -78,6 +81,7 @@ canvas { width: 100%; height: 100%; display: block; touch-action: none; }
 .overlay-card #difficulty-note { font-size: 12px; line-height: 1.5; margin-top: 9px; text-align: left; min-height: 18px; }
 .start-tips { display: flex; flex-direction: column; text-align: left; gap: 7px; margin: 15px auto 19px; width: max-content; max-width: 100%; font-size: 13px; line-height: 1.4; }
 .start-tips b { color: #7b8b49; margin-right: 7px; }
+.tips-phone { display: none; }
 .primary-button { flex-shrink: 0; background: var(--yellow); border: 2px solid var(--ink); border-radius: 12px; padding: 13px 18px; font-size: 18px; font-weight: 900; box-shadow: 3px 4px 0 var(--ink); width: 100%; min-height: 51px; transition: transform .12s, box-shadow .12s; margin-top: 8px; }
 .primary-button:hover { transform: translate(-1px, -1px); box-shadow: 4px 5px 0 var(--ink); }
 .primary-button:active { transform: translate(3px, 4px); box-shadow: none; }
@@ -158,6 +162,11 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .top-actions { gap: 3px; }
   .top-actions button { font-size: 18px; padding: 5px; gap: 4px; }
   .top-actions button span { font-size: 11px; }
+  #guide-open { padding: 5px 7px; }
+  #guide-open .guide-label-full { display: none; }
+  #guide-open .guide-label-short { display: inline; font-size: 12px; }
+  .tips-desktop { display: none; }
+  .tips-phone { display: inline; }
   .stage { aspect-ratio: 1/1; }
   .stage:has(.overlay:not([hidden])) { min-height: 460px; }
   .hud { left: 9px; right: 9px; top: 9px; }
@@ -190,13 +199,15 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .skill small { font-size: 11px; }
   .skill kbd { display: none; }
   .touch-controls { padding: 3px 11px 16px; gap: 8px; }
-  .direction-buttons, .action-buttons { gap: 7px; }
-  .control-button { height: 54px; min-width: 46px; font-size: 24px; border-radius: 11px; }
+  .direction-buttons, .action-buttons { gap: 5px; }
+  .control-button { height: 54px; min-width: 44px; font-size: 24px; border-radius: 11px; }
   .control-button span { font-size: 13px; }
-  .jump-button { min-width: 57px; gap: 3px; flex-direction: column; font-size: 17px; line-height: 1; padding: 5px; }
-  .fart-button { min-width: 62px; font-size: 16px; gap: 3px; flex-direction: column; padding: 5px; }
-  .weapon-button { min-width: 54px; font-size: 14px; flex-direction: column; gap: 3px; padding: 5px; }
+  .jump-button { min-width: 53px; gap: 3px; flex-direction: column; font-size: 17px; line-height: 1; padding: 5px; }
+  .fart-button { min-width: 56px; font-size: 16px; gap: 3px; flex-direction: column; padding: 5px; }
+  .weapon-button { min-width: 49px; font-size: 14px; flex-direction: column; gap: 3px; padding: 5px; }
   .weapon-button small { font-size: 10px; }
+  .down-button { flex-direction: column; gap: 3px; padding: 5px; font-size: 19px; line-height: 1; }
+  .down-button span { font-size: 12px; }
   .touch-hint { display: none; }
   .game-bottom { padding: 10px 11px; font-size: 11px; gap: 5px; }
   .keyboard-help { display: none; }
@@ -221,7 +232,7 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .live-label { gap: 5px; font-size: 11px; }
   .live-label > span { display: none; }
   .top-actions button span { display: none; }
-  .top-actions button { min-width: 34px; }
+  .top-actions button { min-width: 44px; }
   .overlay { padding: 10px; }
   .overlay-card { padding: 15px 15px; }
   .overlay-card h2 { font-size: 31px; }
@@ -239,6 +250,21 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .weapon-button { min-width: 49px; }
   footer { flex-wrap: wrap; }
 }
+@media (max-width: 370px) and (orientation: portrait) {
+  .touch-controls { display: grid; grid-template-columns: 1fr 1.25fr; gap: 14px; padding: 2px 10px 10px; }
+  .direction-buttons, .action-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .direction-buttons [data-control="left"] { grid-column: 1; grid-row: 1; }
+  .direction-buttons [data-control="right"] { grid-column: 2; grid-row: 1; }
+  .down-button { grid-column: 1/-1; grid-row: 2; flex-direction: row; }
+  .jump-button { grid-column: 1; grid-row: 1; }
+  .fart-button { grid-column: 2; grid-row: 1; }
+  .weapon-button { grid-column: 1/-1; grid-row: 2; flex-direction: row; }
+  .control-button { min-width: 44px; width: 100%; height: 44px; padding: 3px; gap: 2px; line-height: 1; }
+  .control-button span { font-size: 12px; }
+  .game-bottom { padding: 6px 10px; }
+  .game-bottom > span:first-child { display: none; }
+  .mobile-help { font-size: 10px; line-height: 1.5; }
+}
 @media (max-height: 650px) and (orientation: portrait) {
   .stage { aspect-ratio: 4/3; }
   .skill { min-height: 52px; padding-top: 7px; padding-bottom: 7px; }
@@ -249,7 +275,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .site-header, .intro, .below-game, footer { display: none; }
   .game-card { margin: 7px auto; border-radius: 12px; max-width: 1040px; display: grid; grid-template-columns: minmax(0, 1fr) 215px; }
   .game-topbar { grid-column: 1/-1; min-height: 38px; padding-top: 3px; padding-bottom: 3px; }
-  .top-actions button { min-height: 30px; font-size: 18px; padding: 4px 6px; }
+  .top-actions button { min-height: 44px; min-width: 44px; font-size: 18px; padding: 4px 6px; }
+  #guide-open .guide-label-full { display: none; }
+  #guide-open .guide-label-short { display: inline; font-size: 12px; }
   .stage, .stage:has(.overlay:not([hidden])) { aspect-ratio: auto; height: min(360px, calc(100dvh - 72px)); grid-column: 1; grid-row: 2/6; min-height: 0; }
   .weapon-status { grid-column: 2; grid-row: 2; border-top: 0; font-size: 10px; padding: 7px 9px; min-height: 30px; }
   .skill-strip { grid-column: 2; grid-row: 3; grid-template-columns: 1fr 1fr; padding: 8px; gap: 7px; align-content: start; }
@@ -260,7 +288,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
   .skill kbd { display: none; }
   .touch-controls { grid-column: 2; grid-row: 4; flex-wrap: wrap; padding: 5px 8px 11px; justify-content: center; gap: 8px; align-content: center; }
   .direction-buttons, .action-buttons { justify-content: center; width: 100%; gap: 7px; }
-  .control-button { height: 47px; min-width: 76px; }
+  .control-button { height: 47px; min-width: 56px; }
+  .down-button { flex-direction: column; gap: 2px; padding: 4px; font-size: 17px; line-height: 1; }
+  .down-button span { font-size: 11px; }
   .jump-button, .fart-button, .weapon-button { min-width: 56px; padding: 5px; flex-direction: column; font-size: 15px; gap: 3px; }
   .control-button span { font-size: 12px; }
   .weapon-button small { font-size: 10px; }
@@ -292,9 +322,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
 }
 @media (max-height: 350px) and (orientation: landscape) {
   .skill-strip { gap: 5px; padding: 6px; }
-  .skill { min-height: 39px; padding: 5px; }
+  .skill { min-height: 44px; padding: 5px; }
   .skill small { display: none; }
-  .control-button { height: 39px; }
+  .control-button { height: 44px; }
   .game-bottom { display: none; }
   .weapon-status { min-height: 25px; padding: 5px 8px; }
   .overlay-card > small, .modal-badge, .start-tips, .difficulty-heading { display: none; }
@@ -307,4 +337,53 @@ footer { display: flex; justify-content: space-between; gap: 12px; border-top: 1
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
   .record-card { transform: none; }
+}
+
+#controls-guide { width: min(860px, calc(100% - 24px)); max-height: calc(100dvh - 28px); padding: 0; border: 2px solid var(--ink); border-radius: 23px; background: #fffaf0; color: var(--ink); box-shadow: 7px 8px 0 #303a3033; overflow: hidden; }
+#controls-guide[open] { display: flex; flex-direction: column; }
+#controls-guide::backdrop { background: #28362f99; backdrop-filter: blur(4px); }
+.guide-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 20px 25px 18px; border-bottom: 2px solid var(--ink); background: #fff1bd; flex-shrink: 0; }
+.guide-eyebrow { display: block; font-size: 12px; font-weight: 700; color: #7d754d; margin-bottom: 5px; }
+.guide-header h2 { font-size: 29px; line-height: 1.2; margin: 0; font-weight: 900; }
+#guide-close { display: flex; align-items: center; gap: 9px; min-height: 44px; min-width: 78px; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; background: #fffaf0; font-size: 14px; font-weight: 800; flex-shrink: 0; box-shadow: 2px 2px 0 var(--ink); }
+#guide-close span { font-size: 22px; line-height: 1; }
+.guide-content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 20px; overflow-y: auto; min-height: 0; overscroll-behavior: contain; scrollbar-width: thin; }
+.guide-panel { border: 1px solid #dddccb; border-radius: 15px; padding: 17px 18px; background: #fffdf6; min-width: 0; }
+.guide-phone { background: #f0f6e4; }
+.guide-panel h3 { font-size: 18px; margin: 0 0 14px; font-weight: 900; }
+.key-layout { display: flex; justify-content: center; align-items: center; gap: 12px; min-height: 91px; border-radius: 11px; background: #f6efd8; margin: 0 0 15px; padding: 9px; }
+.key-layout > span { font-size: 12px; color: #7b8069; }
+.key-cluster { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.key-cluster > div { display: flex; gap: 4px; }
+.key-layout kbd { width: 30px; height: 30px; display: grid; place-items: center; background: #fffaf0; border: 1.5px solid #939d78; border-bottom-width: 3px; border-radius: 6px; padding: 1px; font-size: 16px; font-weight: 800; }
+.phone-hands { display: flex; justify-content: space-around; gap: 9px; min-height: 91px; align-items: center; background: #e0edc9; border-radius: 11px; margin-bottom: 15px; padding: 9px; }
+.phone-hands span { font-size: 13px; text-align: center; }
+.phone-hands b { display: block; font-size: 22px; letter-spacing: 4px; margin-bottom: 7px; }
+.guide-actions { margin: 0; }
+.guide-actions > div { display: grid; grid-template-columns: 95px minmax(0, 1fr); gap: 11px; align-items: center; border-bottom: 1px dashed #d6d9c5; padding: 10px 0; min-height: 48px; }
+.guide-actions > div:last-child { border-bottom: 0; }
+.guide-actions dt { font-size: 13px; font-weight: 800; line-height: 1.8; }
+.guide-actions dt small { display: block; font-size: 12px; color: #717a60; font-weight: 500; }
+.guide-actions kbd { display: inline-block; font-size: 13px; font-weight: 800; min-width: 24px; text-align: center; padding: 1px 4px; border-color: #b6bea4; }
+.guide-actions dd { margin: 0; font-size: 14px; line-height: 1.7; color: #566044; }
+.guide-note { margin: 14px 0 0; font-size: 13px; line-height: 1.7; background: #ebe9d7; padding: 10px 12px; border-radius: 8px; color: #65714d; }
+@media (max-width: 650px) {
+  #controls-guide { border-radius: 17px; }
+  .guide-header { padding: 15px 16px; gap: 10px; }
+  .guide-header h2 { font-size: 25px; }
+  .guide-eyebrow { font-size: 11px; }
+  #guide-close { min-width: 75px; font-size: 13px; }
+  .guide-content { grid-template-columns: 1fr; padding: 12px; gap: 12px; }
+  .guide-panel { padding: 15px; }
+  .guide-phone { order: 1; }
+  .guide-desktop { order: 2; }
+  .guide-panel h3 { font-size: 17px; }
+  .guide-actions > div { grid-template-columns: 88px minmax(0, 1fr); gap: 9px; }
+  .guide-actions dd { font-size: 13px; }
+  .guide-note { font-size: 12px; }
+}
+@media (max-height: 420px) and (orientation: landscape) {
+  .guide-header { padding: 10px 18px; }
+  .guide-header h2 { font-size: 24px; }
+  .guide-eyebrow { display: none; }
 }

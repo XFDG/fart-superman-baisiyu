@@ -25,9 +25,9 @@ let hero, platforms, enemies, beans, projectiles, particles, fields, numbers;
 let score = 0, beanCount = 0, attackTimer = 0, attackStreak = 0, critCount = 0, forceCrit = false;
 let skill = 'stink', checkpoint = 0, lastHeal = -10, jumpBuffer = 0, coyote = 0, zone = 0;
 let bossDefeated = false, bossShots = [], best = 0, muted = false, hudTick = 0;
-const input = { left: false, right: false, fire: false, weapon: false };
+const input = { left: false, right: false, down: false, fire: false, weapon: false };
 const keyHeld = new Set();
-const touchHeld = { left: new Set(), right: new Set(), fire: new Set(), weapon: new Set() };
+const touchHeld = { left: new Set(), right: new Set(), fire: new Set(), weapon: new Set(), down: new Set() };
 try {
   const savedDifficulty = localStorage.getItem('baisiyu-difficulty-v1');
   if (DIFFICULTIES[savedDifficulty]) difficulty = savedDifficulty;
@@ -47,14 +47,15 @@ const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h
 function resetInput() {
   keyHeld.clear();
   for (const held of Object.values(touchHeld)) held.clear();
-  input.left = input.right = input.fire = input.weapon = false;
+  input.left = input.right = input.down = input.fire = input.weapon = false;
   jumpBuffer = 0;
   document.querySelectorAll('.pressed').forEach(el => el.classList.remove('pressed'));
 }
 function updateInput() {
   input.left = keyHeld.has('KeyA') || keyHeld.has('ArrowLeft') || touchHeld.left.size > 0;
   input.right = keyHeld.has('KeyD') || keyHeld.has('ArrowRight') || touchHeld.right.size > 0;
-  input.fire = keyHeld.has('KeyJ') || keyHeld.has('KeyX') || touchHeld.fire.size > 0;
+  input.fire = keyHeld.has('KeyK') || touchHeld.fire.size > 0;
+  input.down = keyHeld.has('KeyS') || keyHeld.has('ArrowDown') || touchHeld.down.size > 0;
   input.weapon = keyHeld.has('KeyE') || touchHeld.weapon.size > 0;
 }
 function resize() {
@@ -67,7 +68,7 @@ function resize() {
 }
 new ResizeObserver(resize).observe($('#stage'));
 function init() {
-  hero = { x: 110, y: FLOOR - 60, w: 44, h: 60, vx: 0, vy: 0, dir: 1, hp: settings().health, maxHp: settings().health, energy: 100, hurt: 0, grounded: true, jumps: 0, weapon: false };
+  hero = { x: 110, y: FLOOR - 60, w: 44, h: 60, vx: 0, vy: 0, dir: 1, hp: settings().health, maxHp: settings().health, energy: 100, hurt: 0, grounded: true, jumps: 0, weapon: false, dropTimer: 0 };
   weaponCooldown = 0;
   platforms = [
     {x:0,y:FLOOR,w:1200,h:180,kind:'ground'}, {x:1330,y:FLOOR,w:1570,h:180,kind:'ground'},
@@ -133,7 +134,7 @@ function showOverlay(kind) {
   if ($('#difficulty-picker')) $('#difficulty-picker').hidden = kind === 'paused';
   $('#overlay').hidden=false;
 }
-function start() {init();mode='playing';$('#overlay').hidden=true;$('#pause-toggle').setAttribute('aria-label','暂停游戏');$('#pause-toggle').innerHTML='Ⅱ <span>暂停</span>';toast('出发！吃豆回气，按 J 或“放屁”攻击。',3.5);if(matchMedia('(pointer: coarse)').matches || innerWidth<=700)requestAnimationFrame(()=>$('.game-card').scrollIntoView({block:'start',behavior:'auto'}));}
+function start() {init();mode='playing';$('#overlay').hidden=true;$('#pause-toggle').setAttribute('aria-label','暂停游戏');$('#pause-toggle').innerHTML='Ⅱ <span>暂停</span>';const touchLayout=matchMedia('(pointer: coarse)').matches || innerWidth<=700;toast(touchLayout?'左手移动和下落，右手跳跃、放屁；点四色卡换屁！':'WASD / 方向键行动，1–4 选屁，K 放屁！',3.5);if(touchLayout)requestAnimationFrame(()=>$('.game-card').scrollIntoView({block:'start',behavior:'auto'}));}
 function togglePause() {
   if(mode==='playing'){mode='paused';resetInput();showOverlay('paused');$('#pause-toggle').innerHTML='▶ <span>继续</span>';$('#pause-toggle').setAttribute('aria-label','继续游戏');}
   else if(mode==='paused'){mode='playing';$('#overlay').hidden=true;$('#pause-toggle').innerHTML='Ⅱ <span>暂停</span>';$('#pause-toggle').setAttribute('aria-label','暂停游戏');}
@@ -155,7 +156,7 @@ function hurt(amount=1, fall=false) {
   if(mode!=='playing'||hero.hurt>0&&!fall)return;
   hero.hp-=amount;hero.hurt=1.6;shake=8;audio.play('hurt');puff(hero.x+18,hero.y+25,'#f4ad93',14);
   if(hero.hp<=0){hero.hp=0;finish(false);return;}
-  if(fall){hero.x=checkpoint===2?4470:checkpoint===1?2270:110;hero.y=FLOOR-hero.h;hero.vx=hero.vy=0;hero.jumps=0;hero.grounded=true;hero.energy=Math.max(hero.energy,45);camera=clamp(hero.x-W*.36,0,WORLD-W);toast('小旗子接住你啦！粉色香屁可以回血。');}
+  if(fall){hero.x=checkpoint===2?4470:checkpoint===1?2270:110;hero.y=FLOOR-hero.h;hero.vx=hero.vy=0;hero.jumps=0;hero.dropTimer=0;hero.grounded=true;hero.energy=Math.max(hero.energy,45);camera=clamp(hero.x-W*.36,0,WORLD-W);toast('小旗子接住你啦！粉色香屁可以回血。');}
   else {hero.vy=-280;hero.vx=-hero.dir*160;floating('哎哟！',hero.x,hero.y-10,'#c26558');}
   syncHUD();
 }
@@ -197,7 +198,20 @@ function fireWeapon() {
   puff(x,y,'#ffd125',20,1.8);shake=6;audio.play('fart','yellow');audio.play('crit');
   floating('浩然炮，发射！',hero.x,hero.y-35,'#9b6615');syncHUD();
 }
+function dropDown() {
+  if(mode !== 'playing') return;
+  if(hero.grounded) {
+    const support = platforms.find(p => p.kind === 'float' && Math.abs(hero.y + hero.h - p.y) < 4 && hero.x + hero.w > p.x && hero.x < p.x + p.w);
+    if(!support) return; // Solid ground remains solid.
+    hero.dropTimer=.28; hero.y+=8; hero.grounded=false;
+    hero.jumps=1; coyote=0; jumpBuffer=0;
+    puff(hero.x+hero.w/2,hero.y+hero.h,'#ecdfb8',5,.55);
+  }
+  hero.vy=Math.max(hero.vy,180);
+}
 function moveHero(dt) {
+  hero.dropTimer=Math.max(0,hero.dropTimer-dt);
+  if(input.down && hero.grounded)dropDown();
   const direction=(input.right?1:0)-(input.left?1:0);
   if(direction){hero.dir=direction;hero.vx+=direction*1550*dt;hero.vx=clamp(hero.vx,-270,270);}
   else hero.vx*=Math.pow(.00004,dt);
@@ -212,8 +226,8 @@ function moveHero(dt) {
     }
   }
   const previousBottom=hero.y+hero.h;
-  hero.vy+=GRAVITY*dt;hero.y+=hero.vy*dt;hero.grounded=false;
-  if(hero.vy>=0)for(const p of platforms){if(hero.x+hero.w>p.x&&hero.x<p.x+p.w&&previousBottom<=p.y+3&&hero.y+hero.h>=p.y){hero.y=p.y-hero.h;hero.vy=0;hero.grounded=true;hero.jumps=0;break;}}
+  hero.vy+=GRAVITY*dt*(input.down?1.85:1);hero.y+=hero.vy*dt;hero.grounded=false;
+  if(hero.vy>=0)for(const p of platforms){if(p.kind==='float'&&hero.dropTimer>0)continue;if(hero.x+hero.w>p.x&&hero.x<p.x+p.w&&previousBottom<=p.y+3&&hero.y+hero.h>=p.y){hero.y=p.y-hero.h;hero.vy=0;hero.grounded=true;hero.jumps=0;break;}}
   if(hero.y>H+120)hurt(1,true);
   hero.hurt=Math.max(0,hero.hurt-dt);
   hero.energy=Math.min(100,hero.energy+settings().regen*dt);
@@ -400,14 +414,16 @@ for(const el of document.querySelectorAll('[data-control]')){
   el.addEventListener('pointerdown',ev=>{
     ev.preventDefault();unlockSound();if(mode!=='playing')return;
     el.setPointerCapture(ev.pointerId);el.classList.add('pressed');
-    if(action==='jump')jumpBuffer=.14;else {touchHeld[action].add(ev.pointerId);updateInput();if(action==='fire')fire();if(action==='weapon')fireWeapon();}
+    if(action==='jump')jumpBuffer=.14;else {touchHeld[action].add(ev.pointerId);updateInput();if(action==='fire')fire();if(action==='weapon')fireWeapon();if(action==='down')dropDown();}
   });
   const release=ev=>{if(action!=='jump'){touchHeld[action].delete(ev.pointerId);updateInput();}el.classList.remove('pressed');};
   el.addEventListener('pointerup',release);el.addEventListener('pointercancel',release);el.addEventListener('lostpointercapture',release);
   el.addEventListener('contextmenu',ev=>ev.preventDefault());
 }
-const gameKeys=new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space','KeyA','KeyD','KeyW','KeyJ','KeyX','KeyK','KeyC','KeyE','KeyP','Escape','Digit1','Digit2','Digit3','Digit4']);
+const gameKeys=new Set(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space','KeyA','KeyD','KeyW','KeyS','KeyK','KeyE','KeyP','Escape','Digit1','Digit2','Digit3','Digit4']);
 window.addEventListener('keydown',ev=>{
+  if($('#controls-guide')?.open)return;
+  if(ev.code==='Space' && ev.target instanceof HTMLButtonElement && ev.target.id==='guide-open')return;
   if(!gameKeys.has(ev.code)||ev.ctrlKey||ev.metaKey||ev.altKey)return;
   if(ev.target instanceof HTMLElement&&['INPUT','TEXTAREA','SELECT'].includes(ev.target.tagName))return;
   // Preserve native Space/Enter activation on focused menu buttons.
@@ -417,9 +433,9 @@ window.addEventListener('keydown',ev=>{
     if(ev.code==='KeyP'||ev.code==='Escape'){togglePause();return;}
     if(mode!=='playing')return;
     if(['Space','ArrowUp','KeyW'].includes(ev.code))jumpBuffer=.14;
-    if(['KeyK','KeyC'].includes(ev.code))setSkill(order[(order.indexOf(skill)+1)%order.length]);
+    if(['KeyS','ArrowDown'].includes(ev.code))dropDown();
     if(ev.code.startsWith('Digit'))setSkill(order[Number(ev.code.slice(-1))-1]);
-    if(['KeyJ','KeyX'].includes(ev.code))fire();
+    if(ev.code==='KeyK')fire();
     if(ev.code==='KeyE')fireWeapon();
   }
   if(mode==='playing'){keyHeld.add(ev.code);updateInput();}
@@ -428,6 +444,26 @@ window.addEventListener('keyup',ev=>{keyHeld.delete(ev.code);updateInput();});
 window.addEventListener('blur',()=>{resetInput();if(mode==='playing')togglePause();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){resetInput();if(mode==='playing')togglePause();}});
 
+let guideResume = false;
+function openGuide() {
+  const guide=$('#controls-guide');
+  if(!guide || guide.open)return;
+  guideResume=mode==='playing';
+  if(guideResume)togglePause();
+  resetInput();guide.showModal();
+}
+$('#guide-open')?.addEventListener('click',openGuide);
+$('#guide-close')?.addEventListener('click',()=>$('#controls-guide').close());
+$('#controls-guide')?.addEventListener('close',()=>{
+  resetInput();
+  if(guideResume && mode==='paused' && !document.hidden)togglePause();
+  guideResume=false;
+});
+$('#controls-guide')?.addEventListener('click',ev=>{
+  if(ev.target!==ev.currentTarget)return;
+  const rect=ev.currentTarget.getBoundingClientRect();
+  if(ev.clientX<rect.left||ev.clientX>rect.right||ev.clientY<rect.top||ev.clientY>rect.bottom)ev.currentTarget.close();
+});
 document.querySelectorAll('[data-difficulty]').forEach(el => el.addEventListener('click', () => selectDifficulty(el.dataset.difficulty)));
 init();syncSound();syncDifficulty();resize();requestAnimationFrame(frame);
 if(new URLSearchParams(location.search).has('debug')){

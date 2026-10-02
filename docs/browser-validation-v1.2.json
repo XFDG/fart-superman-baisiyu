@@ -1,0 +1,501 @@
+{
+  "timestamp": "2026-10-02T05:21:04.425Z",
+  "url": "http://127.0.0.1:4173/",
+  "method": "Initial 26 checks and focused guide/layout repeat with wait for native asynchronous dialog close event; no project changes by QA.",
+  "reports": [
+    {
+      "name": "a movement",
+      "status": "pass",
+      "details": {
+        "before": 220,
+        "after": 160.32797050000002
+      }
+    },
+    {
+      "name": "ArrowLeft movement",
+      "status": "pass",
+      "details": {
+        "before": 220,
+        "after": 164.83744444444443
+      }
+    },
+    {
+      "name": "d movement",
+      "status": "pass",
+      "details": {
+        "before": 220,
+        "after": 275.1625555555555
+      }
+    },
+    {
+      "name": "ArrowRight movement",
+      "status": "pass",
+      "details": {
+        "before": 220,
+        "after": 275.1625555555555
+      }
+    },
+    {
+      "name": "W and ArrowUp jump and double jump",
+      "status": "pass",
+      "details": {
+        "firstW": 351.83428333333336,
+        "secondUp": 310.06603541666664,
+        "firstUp": 344.63867083333344
+      }
+    },
+    {
+      "name": "s drops through floating platform and lands on ground",
+      "status": "pass",
+      "details": {
+        "initialY": 293,
+        "dropY": 384,
+        "groundY": 384,
+        "hp": 5
+      }
+    },
+    {
+      "name": "ArrowDown drops through floating platform and lands on ground",
+      "status": "pass",
+      "details": {
+        "initialY": 293,
+        "dropY": 384,
+        "groundY": 384,
+        "hp": 5
+      }
+    },
+    {
+      "name": "S cannot fall through solid ground",
+      "status": "pass",
+      "details": {
+        "y": 384,
+        "hp": 5
+      }
+    },
+    {
+      "name": "down increases airborne fall speed",
+      "status": "pass",
+      "details": {
+        "jumpVy": -409.95833333333337,
+        "normalVy": -222.5416666666669,
+        "fastVy": 0,
+        "normalY": 291.83623993055556,
+        "fastY": 384
+      }
+    },
+    {
+      "name": "1 selects yellow",
+      "status": "pass",
+      "details": {
+        "skill": "yellow"
+      }
+    },
+    {
+      "name": "2 selects green",
+      "status": "pass",
+      "details": {
+        "skill": "green"
+      }
+    },
+    {
+      "name": "3 selects stink",
+      "status": "pass",
+      "details": {
+        "skill": "stink"
+      }
+    },
+    {
+      "name": "4 selects pink",
+      "status": "pass",
+      "details": {
+        "skill": "pink"
+      }
+    },
+    {
+      "name": "K tap fires chosen skill without switching",
+      "status": "pass",
+      "details": {
+        "kinds": [
+          "green"
+        ],
+        "skill": "green"
+      }
+    },
+    {
+      "name": "K held repeats real attacks without switching",
+      "status": "pass",
+      "details": {
+        "skill": "stink",
+        "critCount": 2,
+        "streak": 1,
+        "projectiles": 8
+      }
+    },
+    {
+      "name": "guide opens with keyboard focus, pauses and blocks gameplay keys",
+      "status": "pass",
+      "details": {
+        "mode": "paused",
+        "time": 0.25330000000000014,
+        "focusInside": true
+      }
+    },
+    {
+      "name": "Escape closes guide and resumes without underlying pause",
+      "status": "pass",
+      "details": {
+        "mode": "playing",
+        "input": {
+          "left": false,
+          "right": false,
+          "down": false,
+          "fire": false,
+          "weapon": false
+        }
+      }
+    },
+    {
+      "name": "guide close button resumes and restores opener focus",
+      "status": "pass",
+      "details": {
+        "mode": "playing",
+        "focus": "guide-open"
+      }
+    },
+    {
+      "name": "guide opened from paused preserves paused state",
+      "status": "pass",
+      "details": {
+        "modeAfterClose": "paused",
+        "modeAfterResume": "playing"
+      }
+    },
+    {
+      "name": "guide opened from title preserves title; text matches controls",
+      "status": "pass",
+      "details": {
+        "mode": "title",
+        "guideText": "白思雨的冒险小抄\n操作指南\n关闭\n×\n电脑 · 键盘出击\nW\nA\nS\nD\n或\n↑\n←\n↓\n→\nA D\n或 ← / →\n左右移动\nW / ↑\n跳跃；空中再按一次可二段跳\nS / ↓\n从脚下的悬浮平台穿过下落；空中长按可快速下降\n1 2\n3 4\n选屁种：1 黄屁、2 绿屁、3 普通臭屁、4 粉色香屁\nK\n放屁攻击；长按持续连发\nE\n炮击；先在 BOSS 前拾取浩然屁力炮，消耗 18 点屁力，有充能间隔\nP / Esc\n暂停 / 继续游戏\n\n空格也能跳跃。下落只穿过悬浮平台，地面不会穿透；注意脚下的深坑！\n\n手机 · 双手一起玩\n← ↓ →\n左手行动\n↑ 噗！\n右手出招\n左手 ← / →\n长按左右按钮移动\n下落 ↓\n从悬浮平台下落；空中长按快速下降，地面不穿透\n右手「跳跃」\n点一下起跳；空中再点一下二段跳\n右手「放屁」\n点按攻击，长按持续连发\n四色技能卡\n直接点黄、绿、普通臭、粉香，切换屁种\n「炮击」\n拾取浩然屁力炮后可用；长按可在充能完成后继续开火\n顶部 Ⅱ / ▶\n暂停 / 继续；随时点「指南」查看操作\n\n支持多指同时按：左手移动，右手跳跃、放屁。吃豆回气，粉色香屁可以回血！"
+      }
+    },
+    {
+      "name": "mobile move, attack, jump and down with independent fingers and cancel",
+      "status": "pass",
+      "details": {
+        "jumps": 2,
+        "downApplied": true,
+        "releaseInput": {
+          "left": false,
+          "right": true,
+          "down": false,
+          "fire": false,
+          "weapon": false
+        },
+        "cancelInput": {
+          "left": false,
+          "right": false,
+          "down": false,
+          "fire": false,
+          "weapon": false
+        }
+      }
+    },
+    {
+      "name": "desktop input and guide layout no overflow",
+      "status": "pass",
+      "details": {
+        "pageWidth": 1440,
+        "width": 1440,
+        "height": 1080,
+        "controls": [
+          {
+            "action": "left",
+            "x": 137,
+            "y": 779.84375,
+            "right": 202,
+            "bottom": 834.84375,
+            "width": 65,
+            "height": 55
+          },
+          {
+            "action": "down",
+            "x": 212,
+            "y": 779.84375,
+            "right": 277,
+            "bottom": 834.84375,
+            "width": 65,
+            "height": 55
+          },
+          {
+            "action": "right",
+            "x": 287,
+            "y": 779.84375,
+            "right": 352,
+            "bottom": 834.84375,
+            "width": 65,
+            "height": 55
+          },
+          {
+            "action": "weapon",
+            "x": 970,
+            "y": 779.84375,
+            "right": 1062,
+            "bottom": 834.84375,
+            "width": 92,
+            "height": 55
+          },
+          {
+            "action": "jump",
+            "x": 1072,
+            "y": 779.84375,
+            "right": 1176,
+            "bottom": 834.84375,
+            "width": 104,
+            "height": 55
+          },
+          {
+            "action": "fire",
+            "x": 1186,
+            "y": 779.84375,
+            "right": 1303,
+            "bottom": 834.84375,
+            "width": 117,
+            "height": 55
+          }
+        ],
+        "guide": {
+          "x": 290,
+          "y": 127.140625,
+          "width": 860,
+          "height": 825.71875
+        }
+      }
+    },
+    {
+      "name": "mobile input and guide layout no overflow",
+      "status": "pass",
+      "details": {
+        "pageWidth": 390,
+        "width": 390,
+        "height": 844,
+        "controls": [
+          {
+            "action": "left",
+            "x": 23,
+            "y": 605.578125,
+            "right": 67,
+            "bottom": 659.578125,
+            "width": 44,
+            "height": 54
+          },
+          {
+            "action": "down",
+            "x": 72,
+            "y": 605.578125,
+            "right": 116,
+            "bottom": 659.578125,
+            "width": 44,
+            "height": 54
+          },
+          {
+            "action": "right",
+            "x": 121,
+            "y": 605.578125,
+            "right": 165,
+            "bottom": 659.578125,
+            "width": 44,
+            "height": 54
+          },
+          {
+            "action": "weapon",
+            "x": 199,
+            "y": 605.578125,
+            "right": 248,
+            "bottom": 659.578125,
+            "width": 49,
+            "height": 54
+          },
+          {
+            "action": "jump",
+            "x": 253,
+            "y": 605.578125,
+            "right": 306,
+            "bottom": 659.578125,
+            "width": 53,
+            "height": 54
+          },
+          {
+            "action": "fire",
+            "x": 311,
+            "y": 605.578125,
+            "right": 367,
+            "bottom": 659.578125,
+            "width": 56,
+            "height": 54
+          }
+        ],
+        "guide": {
+          "x": 19,
+          "y": 14,
+          "width": 352,
+          "height": 816
+        }
+      }
+    },
+    {
+      "name": "small input and guide layout no overflow",
+      "status": "pass",
+      "details": {
+        "pageWidth": 320,
+        "width": 320,
+        "height": 568,
+        "controls": [
+          {
+            "action": "left",
+            "x": 24,
+            "y": 439.578125,
+            "right": 78.328125,
+            "bottom": 483.578125,
+            "width": 54.328125,
+            "height": 44
+          },
+          {
+            "action": "down",
+            "x": 24,
+            "y": 489.578125,
+            "right": 138.65625,
+            "bottom": 533.578125,
+            "width": 114.65625,
+            "height": 44
+          },
+          {
+            "action": "right",
+            "x": 84.328125,
+            "y": 439.578125,
+            "right": 138.65625,
+            "bottom": 483.578125,
+            "width": 54.328125,
+            "height": 44
+          },
+          {
+            "action": "weapon",
+            "x": 152.65625,
+            "y": 489.578125,
+            "right": 296,
+            "bottom": 533.578125,
+            "width": 143.34375,
+            "height": 44
+          },
+          {
+            "action": "jump",
+            "x": 152.65625,
+            "y": 439.578125,
+            "right": 221.328125,
+            "bottom": 483.578125,
+            "width": 68.671875,
+            "height": 44
+          },
+          {
+            "action": "fire",
+            "x": 227.328125,
+            "y": 439.578125,
+            "right": 296,
+            "bottom": 483.578125,
+            "width": 68.671875,
+            "height": 44
+          }
+        ],
+        "guide": {
+          "x": 19,
+          "y": 14,
+          "width": 282,
+          "height": 540
+        }
+      }
+    },
+    {
+      "name": "landscape input and guide layout no overflow",
+      "status": "pass",
+      "details": {
+        "pageWidth": 844,
+        "width": 844,
+        "height": 390,
+        "controls": [
+          {
+            "action": "left",
+            "x": 633.5,
+            "y": 228.25,
+            "right": 689.5,
+            "bottom": 275.25,
+            "width": 56,
+            "height": 47
+          },
+          {
+            "action": "down",
+            "x": 696.5,
+            "y": 228.25,
+            "right": 752.5,
+            "bottom": 275.25,
+            "width": 56,
+            "height": 47
+          },
+          {
+            "action": "right",
+            "x": 759.5,
+            "y": 228.25,
+            "right": 815.5,
+            "bottom": 275.25,
+            "width": 56,
+            "height": 47
+          },
+          {
+            "action": "weapon",
+            "x": 633.5,
+            "y": 283.25,
+            "right": 689.5,
+            "bottom": 330.25,
+            "width": 56,
+            "height": 47
+          },
+          {
+            "action": "jump",
+            "x": 696.5,
+            "y": 283.25,
+            "right": 752.5,
+            "bottom": 330.25,
+            "width": 56,
+            "height": 47
+          },
+          {
+            "action": "fire",
+            "x": 759.5,
+            "y": 283.25,
+            "right": 815.5,
+            "bottom": 330.25,
+            "width": 56,
+            "height": 47
+          }
+        ],
+        "guide": {
+          "x": 19,
+          "y": 14,
+          "width": 806,
+          "height": 362
+        }
+      }
+    },
+    {
+      "name": "zero browser errors",
+      "status": "pass",
+      "details": {
+        "errors": 0
+      }
+    }
+  ],
+  "errors": [],
+  "pass": 26,
+  "fail": 0,
+  "limitations": [
+    "Chrome Linux touch emulation and real CDP multi-finger touch; no physical mobile test."
+  ]
+}
