@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-10-02T05:24:32.576Z",
+  "url": "https://xfdg.github.io/fart-superman-baisiyu/?v=1.2",
+  "reports": [
+    {
+      "viewport": "desktop",
+      "version": "1.2",
+      "scriptSrc": "./src/game.js?v=1.2",
+      "guidePauseResume": true,
+      "skills": [
+        "yellow",
+        "green",
+        "stink",
+        "pink"
+      ],
+      "KFiresChosenSkill": true,
+      "floatDrop": {
+        "startY": 293,
+        "dropY": 384,
+        "solidGroundY": 384
+      }
+    },
+    {
+      "viewport": "mobile390",
+      "version": "1.2",
+      "guideContent": true,
+      "guidePauseResume": true,
+      "multiTouchRightDown": true,
+      "heroBefore": {
+        "x": 460,
+        "y": 293
+      },
+      "heroAfter": {
+        "x": 479.375,
+        "y": 356.90625
+      },
+      "downButton": {
+        "width": 44,
+        "height": 54
+      },
+      "horizontalOverflow": false
+    }
+  ],
+  "errors": [],
+  "responses": [
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/?v=1.2&debug=1",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/style.css?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/game.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/art.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/audio.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/?v=1.2&debug=1",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/style.css?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/game.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/audio.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/src/art.js?v=1.2",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/favicon.svg",
+      "status": 200
+    },
+    {
+      "url": "https://xfdg.github.io/fart-superman-baisiyu/favicon.svg",
+      "status": 200
+    }
+  ],
+  "passed": true
+}

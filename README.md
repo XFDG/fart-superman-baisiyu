@@ -4,6 +4,12 @@
 
 **[手机 / 电脑直接试玩](https://xfdg.github.io/fart-superman-baisiyu/)**
 
+## 开发全流程图文报告
+
+[下载 16 页 PDF](https://xfdg.github.io/fart-superman-baisiyu/docs/development-report/development-process.pdf)：需求、GitHub 调研、架构、角色与技能、手机控制、版本迭代、测试修复和公开部署，附游戏截图及流程图。
+
+报告源文件在 `docs/development-report/report.html`，插图在同目录 `assets/`。使用已安装的 Playwright 执行 `node tools/build-report.mjs` 可重建；可用 `PLAYWRIGHT_MODULE` 指定模块路径、`CHROME_PATH` 指定浏览器。中文字体优先使用本机 Microsoft YaHei，其他环境需安装可用的中文字体。
+
 ## v1.2 操作更新
 
 游戏顶部“操作指南”可随时查看；打开时暂停，关闭后恢复原来的游戏状态。
