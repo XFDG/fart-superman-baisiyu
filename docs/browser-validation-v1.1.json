@@ -1,0 +1,209 @@
+{
+  "timestamp": "2026-10-02T05:09:08.749Z",
+  "environment": {
+    "browser": "Chrome 147 / Linux headless",
+    "tool": "Playwright + real CDP multi-touch",
+    "url": "http://127.0.0.1:4173/?debug=1"
+  },
+  "method": "Initial complete run plus focused reruns of failures, added audio cleanup checks and nonzero champion-best-score reload verification. No project files modified by QA agent.",
+  "checks": [
+    {
+      "name": "start and audio",
+      "status": "pass"
+    },
+    {
+      "name": "keyboard movement, beans and combat",
+      "status": "pass"
+    },
+    {
+      "name": "keyboard double jump",
+      "status": "pass"
+    },
+    {
+      "name": "yellow skill and actual projectile",
+      "status": "pass"
+    },
+    {
+      "name": "green skill and actual projectile",
+      "status": "pass"
+    },
+    {
+      "name": "stink skill and actual projectile",
+      "status": "pass"
+    },
+    {
+      "name": "pink skill and actual projectile",
+      "status": "pass"
+    },
+    {
+      "name": "pink heals to selected max HP",
+      "status": "pass"
+    },
+    {
+      "name": "critical emits four poop grains",
+      "status": "pass"
+    },
+    {
+      "name": "green slows real enemy",
+      "status": "pass"
+    },
+    {
+      "name": "fall and checkpoint revive",
+      "status": "pass"
+    },
+    {
+      "name": "pause preserves game and cannot switch difficulty",
+      "status": "pass"
+    },
+    {
+      "name": "weapon pickup before boss and E damages boss with cooldown",
+      "status": "pass"
+    },
+    {
+      "name": "full boss fight and trophy win",
+      "status": "pass"
+    },
+    {
+      "name": "mute and best persistence; lose and restart",
+      "status": "pass"
+    },
+    {
+      "name": "easy difficulty affects actual stats",
+      "status": "pass"
+    },
+    {
+      "name": "normal difficulty affects actual stats",
+      "status": "pass"
+    },
+    {
+      "name": "hard difficulty affects actual stats",
+      "status": "pass"
+    },
+    {
+      "name": "difficulty ordering",
+      "status": "pass"
+    },
+    {
+      "name": "mobile multi-touch move, attack, double jump and cancellation",
+      "status": "pass"
+    },
+    {
+      "name": "mobile cannon button causes real boss damage",
+      "status": "pass"
+    },
+    {
+      "name": "desktop complete menu, larger fonts and no horizontal overflow",
+      "status": "pass"
+    },
+    {
+      "name": "mobile complete menu, larger fonts and no horizontal overflow",
+      "status": "pass"
+    },
+    {
+      "name": "small complete menu, larger fonts and no horizontal overflow",
+      "status": "pass"
+    },
+    {
+      "name": "landscape complete menu, larger fonts and no horizontal overflow",
+      "status": "pass"
+    },
+    {
+      "name": "audio effects synthesized and voices cleaned up",
+      "status": "pass"
+    },
+    {
+      "name": "dog hero and bright effects screenshot",
+      "status": "pass"
+    },
+    {
+      "name": "zero browser errors",
+      "status": "pass"
+    }
+  ],
+  "pass": 28,
+  "fail": 0,
+  "browserErrors": [],
+  "difficultyEvidence": [
+    {
+      "difficulty": "easy",
+      "hp": 7,
+      "maxHp": 7,
+      "enemyHP": 33,
+      "bossHP": 290,
+      "regeneration": 10.449366666666549,
+      "bossShots": 1,
+      "bossShotSpeed": 149.99999999999997
+    },
+    {
+      "difficulty": "normal",
+      "hp": 5,
+      "maxHp": 5,
+      "enemyHP": 46,
+      "bossHP": 430,
+      "regeneration": 6.716666666666725,
+      "bossShots": 1,
+      "bossShotSpeed": 204.99999999999997
+    },
+    {
+      "difficulty": "hard",
+      "hp": 3,
+      "maxHp": 3,
+      "enemyHP": 62,
+      "bossHP": 680,
+      "regeneration": 5.683666666666795,
+      "bossShots": 3,
+      "bossShotSpeed": 270
+    }
+  ],
+  "weaponEvidence": {
+    "initialBossHP": 430,
+    "afterOneCannon": 320,
+    "normalCooldown": 1.9,
+    "mobileTap": "real 110 damage"
+  },
+  "winEvidence": {
+    "initialBossHP": 430,
+    "playerHP": 5,
+    "score": 2660,
+    "bestReloaded": 2660
+  },
+  "mobileEvidence": {
+    "doubleJump": 2,
+    "directionTargets": "44 x 54 px",
+    "descriptionFont": "12 px",
+    "skillLabelFont": "13 px",
+    "horizontalOverflow": false,
+    "landscapeStageBottom": 365,
+    "landscapeViewportHeight": 390
+  },
+  "audioEvidence": {
+    "state": "running",
+    "allFourVariants": true,
+    "critical": true,
+    "voicesAfterCleanup": 0,
+    "mutedPlayback": false
+  },
+  "screenshots": [
+    "desktop-menu.png",
+    "desktop-playing.png",
+    "mobile-menu.png",
+    "mobile-playing.png",
+    "small-menu.png",
+    "small-playing.png",
+    "landscape-menu.png",
+    "landscape-playing.png",
+    "yellow-effect.png",
+    "green-effect.png",
+    "stink-effect.png",
+    "pink-effect.png",
+    "critical.png",
+    "dog-hero-effect.png",
+    "boss-weapon.png",
+    "won.png"
+  ],
+  "limitations": [
+    "Mobile viewport and actual multi-touch are browser simulated; no physical iPhone/Android verification.",
+    "Combat tests use debug teleport and step for repeatability; full boss HP is reduced by real projectiles, never directly modified.",
+    "No long-duration game-balance soak test."
+  ]
+}

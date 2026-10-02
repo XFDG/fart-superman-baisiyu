@@ -283,109 +283,219 @@ export function drawPlatform(ctx, p, time = 0) {
 
 export function drawHero(ctx, p, time = 0) {
   ctx.save();
-  const w = p.w || 36, h = p.h || 52;
+  const w = p.w || 44, h = p.h || 60;
   ctx.translate(p.x + w / 2, p.y + h);
-  ctx.scale((p.dir || 1) * w / 36, h / 52);
+  ctx.scale((p.dir || 1) * w / 44, h / 60);
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
   if (p.hurt > 0 && Math.floor(time * 18) % 2 === 0) ctx.globalAlpha = .48;
   const running = p.grounded && Math.abs(p.vx || 0) > 15;
-  const walk = running ? Math.sin(time * 20) * 3.5 : 0;
-  const bounce = running ? Math.abs(Math.sin(time * 20)) * 1.4 : Math.sin(time * 3) * .6;
+  const walk = running ? Math.sin(time * 20) * 2.6 : 0;
+  const bounce = running ? Math.abs(Math.sin(time * 20)) * 1.5 : Math.sin(time * 3) * .6;
   ctx.translate(0, -bounce);
+  const dogInk = '#27232a';
 
-  // A cape with an animated scalloped silhouette.
+  // The little dog wears a bright scarf and a wonderfully oversized cape.
   ctx.beginPath();
-  ctx.moveTo(-6, -35);
-  ctx.bezierCurveTo(-20, -28, -24 - Math.sin(time * 10) * 3, -18, -25, -9);
-  ctx.lineTo(-16, -13);
-  ctx.lineTo(-9, -9);
-  ctx.quadraticCurveTo(-10, -23, 2, -32);
+  ctx.moveTo(-8, -31);
+  ctx.bezierCurveTo(-19, -26, -30 - Math.sin(time * 10) * 3, -13, -28, -3);
+  ctx.lineTo(-18, -8);
+  ctx.lineTo(-12, -5);
+  ctx.quadraticCurveTo(-12, -19, 5, -29);
   ctx.closePath();
-  ctx.fillStyle = '#ed6b67';
+  ctx.fillStyle = '#ff5c65';
   ctx.fill();
-  ctx.strokeStyle = INK;
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = dogInk;
+  ctx.lineWidth = 2.7;
   ctx.stroke();
-  ctx.strokeStyle = '#ffc0a4';
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = '#ffb6a7';
   ctx.beginPath();
-  ctx.moveTo(-9, -31);
-  ctx.quadraticCurveTo(-16, -25, -19, -17);
+  ctx.moveTo(-13, -26);
+  ctx.quadraticCurveTo(-22, -17, -23, -11);
   ctx.stroke();
 
-  // Blue shorts, little sneakers, and a chunky yellow supersuit.
-  rounded(ctx, -10, -17, 21, 12, 4);
-  ctx.fillStyle = '#527f9f';
+  // White little paws keep the silhouette readable against every background.
+  oval(ctx, -7 - walk * .3, -4 + walk, 7.5, 4.5, '#fffefa', dogInk, 2.7);
+  oval(ctx, 8 + walk * .3, -4 - walk, 7.5, 4.5, '#fffefa', dogInk, 2.7);
+  rounded(ctx, -12, -30, 26, 24, 10);
+  ctx.fillStyle = '#ffe052';
   ctx.fill();
-  ctx.strokeStyle = INK;
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = dogInk;
   ctx.stroke();
-  rounded(ctx, -11 - walk * .3, -8 + walk, 12, 8, 3);
-  ctx.fillStyle = '#fff2db';
-  ctx.fill();
-  ctx.stroke();
-  rounded(ctx, 2 + walk * .3, -8 - walk, 13, 8, 3);
-  ctx.fillStyle = '#ef6b65';
-  ctx.fill();
-  ctx.stroke();
-  rounded(ctx, -12, -34, 25, 22, 8);
-  ctx.fillStyle = '#f8cf60';
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#ffe998';
-  rounded(ctx, -8, -31, 9, 14, 4);
-  ctx.fill();
-  // A puff emblem on the chest.
-  oval(ctx, 3, -23, 5.3, 5, '#fff4d7');
-  oval(ctx, 0, -24, 3, 3.2, '#fff4d7');
-  oval(ctx, 5, -25, 3.1, 3, '#fff4d7');
-  ctx.strokeStyle = '#c29642';
-  ctx.lineWidth = 1;
+  oval(ctx, 0, -18, 6.5, 6.2, '#fffefa', dogInk, 1.5);
+  oval(ctx, -2.5, -19.2, 2.7, 2.7, '#a7e994');
+  oval(ctx, 1.5, -20, 3.1, 3.1, '#a7e994');
+  oval(ctx, 3, -17, 2.4, 2.4, '#a7e994');
+  ctx.strokeStyle = '#4c9b4d';
+  ctx.lineWidth = 1.2;
   ctx.beginPath();
-  ctx.moveTo(0, -20);
-  ctx.lineTo(6, -20);
+  ctx.moveTo(-3, -14.7);
+  ctx.lineTo(4, -14.7);
   ctx.stroke();
 
-  // Forward arm becomes an enthusiastic fist while airborne.
-  const armY = p.grounded ? -23 + walk * .35 : -31;
-  ctx.strokeStyle = INK;
-  ctx.lineWidth = 6.5;
+  // A wagging tail and the forward paw add movement without busy detail.
+  ctx.strokeStyle = dogInk;
+  ctx.lineWidth = 6;
   ctx.beginPath();
-  ctx.moveTo(10, -29);
-  ctx.lineTo(16, armY);
+  ctx.moveTo(-11, -11);
+  ctx.quadraticCurveTo(-20, -13, -18, -19 + Math.sin(time * 12) * 2);
   ctx.stroke();
-  ctx.strokeStyle = '#f8cf60';
-  ctx.lineWidth = 4;
+  ctx.strokeStyle = '#fffefa';
+  ctx.lineWidth = 3.5;
   ctx.stroke();
-  oval(ctx, 17, armY, 4, 4.3, '#ffe3bd', INK, 1.6);
+  const armY = p.weapon ? -23 : p.grounded ? -20 + walk * .35 : -29;
+  ctx.strokeStyle = dogInk;
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(10, -25);
+  ctx.lineTo(17, armY);
+  ctx.stroke();
+  ctx.strokeStyle = '#fffefa';
+  ctx.lineWidth = 5;
+  ctx.stroke();
 
-  // A big face and slouchy cobalt cap: readable even on a phone.
-  oval(ctx, 1, -41, 12, 11, '#ffe3bd', INK, 2);
-  oval(ctx, -9, -40, 3.4, 4, '#f7cca8', INK, 1.5);
-  path(ctx, [[-10, -44], [-9, -51], [-2, -54], [6, -51], [10, -47], [8, -44], [4, -48], [1, -44], [-3, -48]], '#443747', null);
+  // Original line-art puppy: a big round head, soft droopy ears and round glasses.
+  oval(ctx, 0, -47, 21, 19.5, '#fffefa', dogInk, 2.9);
+  for (const side of [-1, 1]) {
+    ctx.save();
+    ctx.scale(side, 1);
+    ctx.beginPath();
+    ctx.moveTo(16, -58);
+    ctx.bezierCurveTo(25, -58, 29, -45, 25, -36);
+    ctx.bezierCurveTo(23, -31, 18, -31, 16, -36);
+    ctx.bezierCurveTo(19, -43, 19, -51, 16, -58);
+    ctx.fillStyle = '#fffefa';
+    ctx.fill();
+    ctx.strokeStyle = dogInk;
+    ctx.lineWidth = 2.9;
+    ctx.stroke();
+    ctx.restore();
+  }
+  oval(ctx, -12, -38, 4, 2.4, '#ffb9bf');
+  oval(ctx, 12, -38, 4, 2.4, '#ffb9bf');
+  for (const side of [-1, 1]) {
+    oval(ctx, side * 8, -49, 7.2, 7.2, '#f2ffff', dogInk, 2.4);
+    oval(ctx, side * 8 + 1.1, -48.5, 1.7, 2.7, dogInk);
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(side * 8 - 3.5, -51);
+    ctx.lineTo(side * 8 - 1.5, -53);
+    ctx.stroke();
+  }
+  ctx.strokeStyle = dogInk;
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(-11, -49);
-  ctx.bezierCurveTo(-12, -60, 8, -61, 11, -51);
-  ctx.lineTo(10, -48);
-  ctx.closePath();
-  ctx.fillStyle = '#68a3c1';
+  ctx.moveTo(-.8, -49);
+  ctx.quadraticCurveTo(0, -51, .8, -49);
+  ctx.moveTo(-15.2, -50);
+  ctx.lineTo(-18.3, -52);
+  ctx.moveTo(15.2, -50);
+  ctx.lineTo(18.3, -52);
+  ctx.stroke();
+  oval(ctx, 1.5, -39.5, 3, 2.2, dogInk);
+  ctx.beginPath();
+  ctx.moveTo(1.5, -37.5);
+  ctx.lineTo(1.5, -35.2);
+  ctx.moveTo(-4, -35.8);
+  ctx.quadraticCurveTo(1.5, -30, 7, -35.8);
+  ctx.lineWidth = 1.8;
+  ctx.stroke();
+  rounded(ctx, -13, -30, 28, 5, 2.5);
+  ctx.fillStyle = '#ffc52d';
   ctx.fill();
-  ctx.strokeStyle = INK;
+  ctx.strokeStyle = dogInk;
   ctx.lineWidth = 2;
   ctx.stroke();
-  rounded(ctx, -10, -51, 26, 5, 2.5);
-  ctx.fillStyle = '#6cacc8';
+  path(ctx, [[10, -28], [20, -25], [15, -18], [10, -25]], '#ffd63c', dogInk, 2);
+  if (p.weapon) {
+    ctx.save();
+    ctx.translate(19, -25);
+    ctx.scale(.64, .64);
+    drawCannon(ctx, time);
+    ctx.restore();
+    oval(ctx, 18, -21, 4.3, 4.5, '#fffefa', dogInk, 2.2);
+  } else {
+    oval(ctx, 18, armY, 4.3, 4.5, '#fffefa', dogInk, 2.2);
+  }
+  ctx.restore();
+}
+
+function drawCannon(ctx, time) {
+  const ink = '#27232a';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  path(ctx, [[-4, 5], [6, 5], [3, 19], [-7, 19]], '#f4ba35', ink, 2.8);
+  rounded(ctx, -14, -11, 39, 23, 8);
+  ctx.fillStyle = '#ffdb43';
+  ctx.fill();
+  ctx.strokeStyle = ink;
+  ctx.lineWidth = 2.8;
+  ctx.stroke();
+  rounded(ctx, 15, -9, 21, 19, 4);
+  ctx.fillStyle = '#6ce0b2';
   ctx.fill();
   ctx.stroke();
-  oval(ctx, 5, -41, 2, 2.7, INK);
-  oval(ctx, 5.6, -42, .65, .8, '#fff9e9');
-  oval(ctx, 10, -38, 2.7, 1.7, '#efac98');
-  ctx.beginPath();
-  ctx.arc(5.5, -36.5, 3.3, .08, Math.PI * .78);
-  ctx.strokeStyle = INK;
-  ctx.lineWidth = 1.4;
+  rounded(ctx, 31, -13, 10, 27, 4);
+  ctx.fillStyle = '#3eb58e';
+  ctx.fill();
   ctx.stroke();
+  oval(ctx, 38, .5, 3.5, 8, '#163c3b', ink, 2);
+  oval(ctx, -2, -.2, 7, 7, '#fff6b4', ink, 1.7);
+  sparkle(ctx, -2, -.2, 4.5, '#e29b20');
+  rounded(ctx, -10, -16, 16, 6, 2.5);
+  ctx.fillStyle = '#71f0c1';
+  ctx.fill();
+  ctx.stroke();
+  ctx.strokeStyle = '#fff9cc';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(-9, -7);
+  ctx.lineTo(12, -7);
+  ctx.stroke();
+  oval(ctx, 23, -.5, 3, 3, Math.sin(time * 8) > 0 ? '#fffb8f' : '#c6fff0');
+}
+
+export function drawWeapon(ctx, { x, y, time = 0, collected = false }) {
+  if (collected) return;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.lineCap = 'round';
+  const bob = Math.sin(time * 3) * 4;
+  const halo = ctx.createRadialGradient(0, -47, 6, 0, -47, 72);
+  halo.addColorStop(0, '#ffed8588');
+  halo.addColorStop(.65, '#b4f2bc44');
+  halo.addColorStop(1, '#b4f2bc00');
+  ctx.fillStyle = halo;
+  ctx.fillRect(-74, -120, 148, 125);
+  rounded(ctx, -35, -18, 70, 19, 7);
+  ctx.fillStyle = '#ffe37b';
+  ctx.fill();
+  ctx.strokeStyle = '#54422a';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  rounded(ctx, -26, -23, 52, 7, 3);
+  ctx.fillStyle = '#60cbb0';
+  ctx.fill();
+  ctx.stroke();
+  ctx.save();
+  ctx.translate(-9, -52 + bob);
+  ctx.scale(1.08, 1.08);
+  drawCannon(ctx, time);
+  ctx.restore();
+  for (let i = 0; i < 4; i++) {
+    const a = time * .6 + i * TAU / 4;
+    sparkle(ctx, Math.cos(a) * 49, -54 + Math.sin(a) * 28, 4 + Math.sin(time * 4 + i) * 1.2,
+      i % 2 ? '#44bc96' : '#f1b22c');
+  }
+  ctx.font = '900 19px "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.strokeStyle = '#fffdf0';
+  ctx.lineWidth = 6;
+  ctx.strokeText('浩然屁力炮', 0, -99);
+  ctx.fillStyle = '#3c5d40';
+  ctx.fillText('浩然屁力炮', 0, -99);
   ctx.restore();
 }
 
